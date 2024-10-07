@@ -35,6 +35,9 @@
         }
         .menu-item {
             margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
         .item-name {
             font-weight: bold;
@@ -43,12 +46,21 @@
         .item-description {
             font-size: 0.9em;
             color: #666;
+            flex: 1;
+            padding-right: 10px;
         }
         .item-price {
             font-weight: bold;
             color: #e74c3c;
+            white-space: nowrap;
         }
         .note {
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+        .tropical-note {
+            text-align: right;
             font-style: italic;
             color: #666;
             font-size: 0.9em;
@@ -60,26 +72,35 @@
         <h1>Menu Kebab</h1>
         
         <div class="category">
-            <h2>Kebab e Varianti</h2>
+            <h2>Kebab</h2>
             <div class="menu-item">
-                <span class="item-name">Kebab Panino</span>
+                <div>
+                    <span class="item-name">Kebab Panino</span>
+                    <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
+                </div>
                 <span class="item-price">€5,50</span>
-                <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
             </div>
             <div class="menu-item">
-                <span class="item-name">Piadina Kebab</span>
+                <div>
+                    <span class="item-name">Piadina Kebab</span>
+                    <p class="item-description">Piadina, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
+                </div>
                 <span class="item-price">€6,00</span>
-                <p class="item-description">Stessi ingredienti del Kebab Panino</p>
             </div>
             <div class="menu-item">
-                <span class="item-name">Kebab Tropical</span>
+                <div>
+                    <span class="item-name">Kebab Tropical</span>
+                    <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry, salsa piccante e ananas</p>
+                </div>
                 <span class="item-price">€7,00</span>
-                <p class="note">Aggiunta di pane: €1,00</p>
             </div>
+            <p class="tropical-note">Aggiunta di pane: €1,00</p>
             <div class="menu-item">
-                <span class="item-name">Pizza Kebab</span>
+                <div>
+                    <span class="item-name">Pizza Kebab</span>
+                    <p class="item-description">Rollè di pizza con carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
+                </div>
                 <span class="item-price">€9,50</span>
-                <p class="item-description">Stessi ingredienti del Kebab Panino</p>
             </div>
         </div>
 
@@ -93,31 +114,44 @@
                 <span class="item-name">Porzione Grande</span>
                 <span class="item-price">€10,00</span>
             </div>
+        </div>
+
+        <div class="category">
+            <h2>Costine</h2>
             <div class="menu-item">
                 <span class="item-name">Costine di Maiale</span>
                 <span class="item-price">€18,00</span>
             </div>
+        </div>
+
+        <div class="category">
+            <h2>Wurstel e Panini</h2>
             <div class="menu-item">
                 <span class="item-name">Hot Dog</span>
                 <span class="item-price">€3,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Vegetarian</span>
-                <span class="item-price">€4,00</span>
             </div>
             <div class="menu-item">
                 <span class="item-name">Rot Wurstel</span>
                 <span class="item-price">€3,50</span>
             </div>
             <div class="menu-item">
-                <span class="item-name">Kerry Wurstel</span>
+                <span class="item-name">Currywurst</span>
                 <span class="item-price">€3,50</span>
             </div>
             <div class="menu-item">
-                <span class="item-name">Panino Vegetariano</span>
+                <div>
+                    <span class="item-name">Panino Vegetariano</span>
+                    <p class="item-description">Pane, patatine fritte, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
+                </div>
                 <span class="item-price">€3,00</span>
             </div>
-            <p class="note">Aggiunte: Patatine €0,50 | Insalata, Pomodori, Cetrioli €0,50</p>
+            <div class="menu-item">
+                <div>
+                    <span class="item-name">Piadina Vegetariana</span>
+                    <p class="item-description">Piadina, patatine fritte, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
+                </div>
+                <span class="item-price">€3,50</span>
+            </div>
         </div>
 
         <div class="category">
@@ -139,26 +173,33 @@
         <div class="category">
             <h2>Hamburger</h2>
             <div class="menu-item">
-                <span class="item-name">Classico</span>
+                <div>
+                    <span class="item-name">Classico</span>
+                    <p class="item-description">Hamburger 180 gr con salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Servito con patatine con buccia</p>
+                </div>
                 <span class="item-price">€10,00</span>
-                <p class="item-description">Hamburger 180 gr con salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Servito con patatine con buccia</p>
             </div>
             <div class="menu-item">
-                <span class="item-name">Doppio Classico</span>
-                <span class="item-price">€13,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Italiano</span>
+                <div>
+                    <span class="item-name">Italiano</span>
+                    <p class="item-description">Hamburger 180 gr con salsa BBQ, insalata, pomodoro e provola. Servito con patatine con buccia</p>
+                </div>
                 <span class="item-price">€10,00</span>
-                <p class="item-description">Hamburger 180 gr con salsa BBQ, insalata, pomodoro e provola. Servito con patatine</p>
+            </div>
+            <p class="note">Doppia fettina hamburger: €3,00 in più</p>
+            <div class="menu-item">
+                <div>
+                    <span class="item-name">Cotoletta di Pollo</span>
+                    <p class="item-description">Con salse, insalata, pomodoro</p>
+                </div>
+                <span class="item-price">€4,50</span>
             </div>
             <div class="menu-item">
-                <span class="item-name">Cotoletta di Pollo</span>
-                <p class="item-description">Con salse, insalata, pomodoro</p>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Cordon Bleu</span>
-                <p class="item-description">Con salse, insalata, pomodoro</p>
+                <div>
+                    <span class="item-name">Cordon Bleu</span>
+                    <p class="item-description">Con salse, insalata, pomodoro</p>
+                </div>
+                <span class="item-price">€4,50</span>
             </div>
         </div>
 
@@ -176,7 +217,7 @@
                 <span class="item-name">Patatine Fritte con Buccia Aromatizzata</span>
                 <span class="item-price">€3,00</span>
             </div>
-            <p class="note">Aggiunte alle patatine: Bacon €1,00 | Cheddar Cheese €1,00 | Wurstel €2,00</p>
+            <p class="note">È possibile aggiungere alle patatine: Bacon €1,00 | Cheddar Cheese €1,00 | Wurstel €2,00</p>
             <div class="menu-item">
                 <span class="item-name">Patatine Smile (8 pz)</span>
                 <span class="item-price">€2,50</span>
@@ -202,9 +243,11 @@
                 <span class="item-price">€4,00</span>
             </div>
             <div class="menu-item">
-                <span class="item-name">Mix (10 pz)</span>
+                <div>
+                    <span class="item-name">Mix (10 pz)</span>
+                    <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo</p>
+                </div>
                 <span class="item-price">€5,50</span>
-                <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo</p>
             </div>
         </div>
     </div>
