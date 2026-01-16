@@ -3,253 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Kebab</title>
+    <title>Kebab Tropical | Menù Digitale</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
+        :root {
+            --primary: #ff8c00; /* Arancio Tropical */
+            --dark: #1a1a1a;
+            --light: #fdfdfd;
+            --gray: #777;
+            --bg: #f4f4f7;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
+            line-height: 1.5;
+            padding-bottom: 50px;
         }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
+
+        /* Header Moderno */
+        header {
+            background-color: var(--dark);
+            color: white;
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 5px solid var(--primary);
         }
-        .category {
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e74c3c;
-            padding-bottom: 20px;
-        }
-        .category h2 {
-            color: #e74c3c;
+
+        header h1 {
+            font-size: 1.8rem;
             text-transform: uppercase;
+            letter-spacing: 2px;
         }
+
+        header p {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: -20px auto 0;
+            padding: 0 15px;
+        }
+
+        /* Categorie */
+        .category-title {
+            margin: 40px 0 20px;
+            font-size: 1.2rem;
+            color: var(--dark);
+            text-transform: uppercase;
+            border-left: 4px solid var(--primary);
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Card dei piatti */
         .menu-item {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
             margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+        }
+
+        .menu-item:active { transform: scale(0.98); }
+
+        .item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            margin-bottom: 8px;
         }
+
         .item-name {
-            font-weight: bold;
-            color: #333;
-        }
-        .item-description {
-            font-size: 0.9em;
-            color: #666;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark);
             flex: 1;
-            padding-right: 10px;
         }
+
         .item-price {
-            font-weight: bold;
-            color: #e74c3c;
-            white-space: nowrap;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-left: 10px;
         }
-        .note {
-            font-style: italic;
-            color: #666;
-            font-size: 0.9em;
+
+        .item-description {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 5px;
         }
-        .tropical-note {
-            text-align: right;
+
+        /* Note speciali */
+        .note-box {
+            background: #fff3e0;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 0.8rem;
+            color: #e65100;
+            margin-top: 5px;
             font-style: italic;
-            color: #666;
-            font-size: 0.9em;
+        }
+
+        .tropical-accent { color: var(--primary); font-weight: bold; }
+
+        /* Footer / Contatti */
+        .footer-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Menu Kebab</h1>
-        
-        <div class="category">
-            <h2>Kebab</h2>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Kebab Panino</span>
-                    <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
-                </div>
-                <span class="item-price">€5,50</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Piadina Kebab</span>
-                    <p class="item-description">Piadina, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
-                </div>
-                <span class="item-price">€6,00</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Kebab Tropical</span>
-                    <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry, salsa piccante e ananas</p>
-                </div>
-                <span class="item-price">€7,00</span>
-            </div>
-            <p class="tropical-note">Aggiunta di pane: €1,00</p>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Pizza Kebab</span>
-                    <p class="item-description">Rollè di pizza con carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
-                </div>
-                <span class="item-price">€9,50</span>
-            </div>
-        </div>
 
-        <div class="category">
-            <h2>Porzioni di Carne</h2>
-            <div class="menu-item">
-                <span class="item-name">Porzione Piccola</span>
-                <span class="item-price">€5,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Porzione Grande</span>
-                <span class="item-price">€10,00</span>
-            </div>
-        </div>
+<header>
+    <h1>KEBAB TROPICAL</h1>
+    <p><i class="fas fa-utensils"></i> Paninoteca & Street Food</p>
+</header>
 
-        <div class="category">
-            <h2>Costine</h2>
-            <div class="menu-item">
-                <span class="item-name">Costine di Maiale</span>
-                <span class="item-price">€18,00</span>
-            </div>
-        </div>
-
-        <div class="category">
-            <h2>Wurstel e Panini</h2>
-            <div class="menu-item">
-                <span class="item-name">Hot Dog</span>
-                <span class="item-price">€3,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Rot Wurstel</span>
-                <span class="item-price">€3,50</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Currywurst</span>
-                <span class="item-price">€3,50</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Panino Vegetariano</span>
-                    <p class="item-description">Pane, patatine fritte, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
-                </div>
-                <span class="item-price">€3,00</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Piadina Vegetariana</span>
-                    <p class="item-description">Piadina, patatine fritte, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, salsa curry e salsa piccante</p>
-                </div>
-                <span class="item-price">€3,50</span>
-            </div>
-        </div>
-
-        <div class="category">
-            <h2>Fleischkäse</h2>
-            <div class="menu-item">
-                <span class="item-name">Fleischkäse Panino</span>
-                <span class="item-price">€5,50</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Fleischkäse Piadina</span>
-                <span class="item-price">€6,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Fleischkäse Piatto</span>
-                <span class="item-price">€7,00</span>
-            </div>
-        </div>
-
-        <div class="category">
-            <h2>Hamburger</h2>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Classico</span>
-                    <p class="item-description">Hamburger 180 gr con salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Servito con patatine con buccia</p>
-                </div>
-                <span class="item-price">€10,00</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Italiano</span>
-                    <p class="item-description">Hamburger 180 gr con salsa BBQ, insalata, pomodoro e provola. Servito con patatine con buccia</p>
-                </div>
-                <span class="item-price">€10,00</span>
-            </div>
-            <p class="note">Doppia fettina hamburger: €3,00 in più</p>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Cotoletta di Pollo</span>
-                    <p class="item-description">Con salse, insalata, pomodoro</p>
-                </div>
-                <span class="item-price">€4,50</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Cordon Bleu</span>
-                    <p class="item-description">Con salse, insalata, pomodoro</p>
-                </div>
-                <span class="item-price">€4,50</span>
-            </div>
-        </div>
-
-        <div class="category">
-            <h2>Stuzzicheria</h2>
-            <div class="menu-item">
-                <span class="item-name">Patatine Fritte - Porzione Piccola</span>
-                <span class="item-price">€2,50</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Patatine Fritte - Porzione Grande</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Patatine Fritte con Buccia Aromatizzata</span>
-                <span class="item-price">€3,00</span>
-            </div>
-            <p class="note">È possibile aggiungere alle patatine: Bacon €1,00 | Cheddar Cheese €1,00 | Wurstel €2,00</p>
-            <div class="menu-item">
-                <span class="item-name">Patatine Smile (8 pz)</span>
-                <span class="item-price">€2,50</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Crocchè con Mozzarella (6 pz)</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Mozzarelline (8 pz)</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Panzerottini (6 pz)</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Mini Arancine (6 pz)</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <span class="item-name">Speedy Pollo (8 pz)</span>
-                <span class="item-price">€4,00</span>
-            </div>
-            <div class="menu-item">
-                <div>
-                    <span class="item-name">Mix (10 pz)</span>
-                    <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo</p>
-                </div>
-                <span class="item-price">€5,50</span>
-            </div>
-        </div>
+<div class="container">
+    
+    <div class="category-title">
+        <i class="fas fa-gyroscope"></i> <h2>Kebab</h2>
     </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Kebab Panino</span>
+            <span class="item-price">€5,50</span>
+        </div>
+        <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Piadina Kebab</span>
+            <span class="item-price">€6,00</span>
+        </div>
+        <p class="item-description">Piadina artigianale, carne, mix di verdure fresche e le nostre salse speciali.</p>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Kebab Tropical 🍍</span>
+            <span class="item-price">€7,00</span>
+        </div>
+        <p class="item-description">Il nostro pezzo forte: Carne, cipolla, insalata, crauti, cetrioli, pomodoro, salse e <span class="tropical-accent">Ananas</span>.</p>
+        <div class="note-box">Aggiunta di pane: +€1,00</div>
+    </div>
+
+    <div class="category-title">
+        <i class="fas fa-hamburger"></i> <h2>Hamburger</h2>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Classico (180gr)</span>
+            <span class="item-price">€10,00</span>
+        </div>
+        <p class="item-description">Salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Servito con patatine con buccia.</p>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Italiano (180gr)</span>
+            <span class="item-price">€10,00</span>
+        </div>
+        <p class="item-description">Salsa BBQ, insalata, pomodoro e provola filante. Servito con patatine con buccia.</p>
+        <div class="note-box">Doppia carne hamburger: +€3,00</div>
+    </div>
+
+    <div class="category-title">
+        <i class="fas fa-fries"></i> <h2>Stuzzicheria</h2>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Mix (10 pz)</span>
+            <span class="item-price">€5,50</span>
+        </div>
+        <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo.</p>
+    </div>
+
+    <div class="menu-item">
+        <div class="item-header">
+            <span class="item-name">Patatine Fritte</span>
+            <span class="item-price">da €2,50</span>
+        </div>
+        <p class="item-description">Disponibili: Piccole, Grandi o con Buccia Aromatizzata.</p>
+        <div class="note-box">Extra: Bacon +€1 | Cheddar +€1 | Wurstel +€2</div>
+    </div>
+
+    <div class="footer-info">
+        <p><i class="fab fa-instagram"></i> @kebabtropical</p>
+        <p><i class="fas fa-phone"></i> 333 5004410</p>
+        <p style="margin-top:15px; font-size: 0.7rem;">Kebab Tropical © 2026 - Menù Digitale</p>
+    </div>
+
+</div>
+
 </body>
 </html>
