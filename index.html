@@ -3,126 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kebab Tropical | Menù Digitale</title>
+    <title>Kebab Tropical | Ordina Online</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
-        :root {
-            --primary: #ff8c00; 
-            --dark: #1a1a1a;
-            --gray: #777;
-            --bg: #f4f4f7;
-        }
-
+        :root { --primary: #ff8c00; --dark: #1a1a1a; --gray: #777; --bg: #f4f4f7; }
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg);
-            color: var(--dark);
-            line-height: 1.5;
-            padding-bottom: 50px;
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg); color: var(--dark); padding-bottom: 100px; }
+        
+        /* HEADER */
+        header { background-color: var(--dark); color: white; padding: 30px 20px; text-align: center; border-bottom: 5px solid var(--primary); }
+        header h1 { font-size: 1.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .container { max-width: 600px; margin: 0 auto; padding: 0 15px; }
+        .category-title { margin: 30px 0 15px; font-size: 1.2rem; text-transform: uppercase; border-left: 4px solid var(--primary); padding-left: 10px; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+        
+        /* CARD PRODOTTO (Cliccabile) */
+        .menu-item { background: white; border-radius: 12px; padding: 15px; margin-bottom: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); cursor: pointer; transition: 0.2s; border: 1px solid transparent; }
+        .menu-item:hover { border-color: var(--primary); transform: translateY(-2px); }
+        .item-header { display: flex; justify-content: space-between; font-weight: 700; margin-bottom: 5px; }
+        .item-price { color: var(--primary); }
+        .item-description { font-size: 0.85rem; color: #666; }
+        
+        /* PULSANTE CARRELLO FLUTTUANTE */
+        #cart-btn {
+            position: fixed; bottom: 20px; right: 20px;
+            background-color: var(--primary); color: white;
+            padding: 15px 25px; border-radius: 50px;
+            font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: flex; align-items: center; gap: 10px; cursor: pointer; z-index: 1000;
         }
 
-        header {
-            background-color: var(--dark);
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--primary);
+        /* MODAL (Finestre Popup) */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.6); align-items: flex-end; /* Mobile style */
         }
-
-        header h1 {
-            font-size: 1.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .modal-content {
+            background-color: #fff; width: 100%; max-width: 600px; margin: auto;
+            border-radius: 20px 20px 0 0; padding: 25px; position: relative;
+            max-height: 90vh; overflow-y: auto; animation: slideUp 0.3s ease;
         }
+        @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
 
-        .container {
-            max-width: 600px;
-            margin: -20px auto 0;
-            padding: 0 15px;
+        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; }
+        
+        /* STILE CHECKBOX INGREDIENTI */
+        .ingredient-group { margin: 15px 0; }
+        .ingredient-title { font-weight: bold; margin-bottom: 10px; display: block; color: var(--primary); }
+        .checkbox-label {
+            display: flex; align-items: center; padding: 10px; border: 1px solid #eee;
+            border-radius: 8px; margin-bottom: 8px; cursor: pointer;
         }
+        .checkbox-label input { margin-right: 10px; transform: scale(1.2); accent-color: var(--primary); }
 
-        .category-title {
-            margin: 40px 0 20px;
-            font-size: 1.2rem;
-            color: var(--dark);
-            text-transform: uppercase;
-            border-left: 4px solid var(--primary);
-            padding-left: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        /* CARRELLO LISTA */
+        .cart-item { border-bottom: 1px solid #eee; padding: 10px 0; }
+        .cart-item-title { font-weight: bold; }
+        .cart-item-mods { font-size: 0.8rem; color: #666; margin-top: 5px; }
+        .remove-item { color: red; font-size: 0.8rem; cursor: pointer; text-decoration: underline; }
 
-        .menu-item {
-            background: white;
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            display: flex;
-            flex-direction: column;
-            border: none;
-        }
-
-        .item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
-        }
-
-        .item-name {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .item-price {
-            font-weight: 700;
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .item-description {
-            font-size: 0.85rem;
-            color: var(--gray);
-        }
-
-        .note-box {
-            background: #fff3e0;
-            border-radius: 8px;
-            padding: 10px;
-            font-size: 0.8rem;
-            color: #e65100;
-            margin-top: 10px;
-            font-style: italic;
-        }
-
-        details summary {
-            list-style: none;
-            outline: none;
-            cursor: pointer;
-        }
-        details summary::-webkit-details-marker { display: none; }
-
-        .price-row {
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 8px;
-            padding: 5px 0;
-            border-bottom: 1px dashed #eee;
-            font-size: 0.95rem;
-        }
-
-        .footer-info {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: var(--gray);
-            font-size: 0.85rem;
+        /* FORM DATI */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        
+        .action-btn {
+            width: 100%; padding: 15px; background-color: var(--dark); color: white;
+            border: none; border-radius: 10px; font-size: 1rem; font-weight: bold; cursor: pointer; margin-top: 10px;
         }
     </style>
 </head>
@@ -130,139 +79,222 @@
 
 <header>
     <h1>KEBAB TROPICAL</h1>
-    <p><i class="fas fa-utensils"></i> Paninoteca</p>
+    <p>Tocca i prodotti per modificare gli ingredienti</p>
 </header>
 
-<div class="container">
-    
-    <div class="category-title"><i class="fas fa-utensils"></i> <h2>Kebab</h2></div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Kebab Panino</span><span class="item-price">€5,50</span></div>
-        <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Piadina Kebab</span><span class="item-price">€6,00</span></div>
-        <p class="item-description">Piadina, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Kebab Tropical</span><span class="item-price">€7,00</span></div>
-        <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, patatine fritte, salse e ananas.</p>
-        <div class="note-box">Aggiunta di pane: +€1,00</div>
+<div class="container" id="menu-container">
     </div>
 
-    <div class="category-title"><i class="fas fa-hamburger"></i> <h2>Hamburger</h2></div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Classico (180gr)</span><span class="item-price">€10,00</span></div>
-        <p class="item-description">Salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Con patatine.</p>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Italiano (180gr)</span><span class="item-price">€10,00</span></div>
-        <p class="item-description">Salsa BBQ, insalata, pomodoro e provola. Con patatine.</p>
-        <div class="note-box">Doppio hamburger: +€3,00</div>
-    </div>
-
-    <div class="category-title"><i class="fas fa-drumstick-bite"></i> <h2>Stuzzicheria</h2></div>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Mix Tropical (10 pz) <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price">€5,50</span>
-            </div>
-            <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Crocchè con Mozzarella (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Mozzarelline (8 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Panzerottini (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Mini Arancine (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Speedy Pollo (8 pz)</span><span class="item-price">€4,00</span></div>
-        </div>
-    </details>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Patatine Fritte <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">Vedi prezzi</span>
-            </div>
-            <p class="item-description">Porzioni Piccole, Grandi o con Buccia.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Porzione Piccola</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Porzione Grande</span><span class="item-price">€4,50</span></div>
-            <div class="price-row"><span>Con buccia (Aromatizzata)</span><span class="item-price">€3,00</span></div>
-            <div class="note-box">Extra: Bacon +€1 | Cheddar +€1 | Wurstel +€2</div>
-        </div>
-    </details>
-
-    <div class="category-title"><i class="fas fa-glass-cheers"></i> <h2>Bevande</h2></div>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Bibite e Analcolici <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,00</span>
-            </div>
-            <p class="item-description">Acqua, Coca Cola, Succhi e altro.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Acqua 50 cl</span><span class="item-price">€1,00</span></div>
-            <div class="price-row"><span>Acqua Vetro 1 L</span><span class="item-price">€2,00</span></div>
-            <div class="price-row"><span>Coca Cola 33 cl / Zero Vetro</span><span class="item-price">€2,50/€3,00</span></div>
-            <div class="price-row"><span>Fanta Vetro / Lemonsoda</span><span class="item-price">€3,00 / €2,50</span></div>
-            <div class="price-row"><span>The Limone/Pesca / Schweppes</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Redbull / Succhi vari</span><span class="item-price">€3,00 / €2,00</span></div>
-            <div class="price-row"><span>Analcolico della casa</span><span class="item-price">€2,00</span></div>
-        </div>
-    </details>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Birre <i class="fas fa-beer" style="font-size: 1rem; margin-left: 5px;"></i> <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,50</span>
-            </div>
-            <p class="item-description">Bottiglia, Spina e Artigianali.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">BOTTIGLIA</p>
-            <div class="price-row"><span>Dreher Lemon</span><span class="item-price">€1,50</span></div>
-            <div class="price-row"><span>Nastro Azzurro / Heineken / Bud</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Corona / Tennent's Super</span><span class="item-price">€3,00</span></div>
-            <div class="price-row"><span>Paulaner / Franziskaner 50 cl</span><span class="item-price">€4,00</span></div>
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">ALLA SPINA (Messina)</p>
-            <div class="price-row"><span>Messina 20 cl / 40 cl</span><span class="item-price">€2,50 / €4,00</span></div>
-            <div class="price-row"><span>Messina 50 cl</span><span class="item-price">€5,00</span></div>
-        </div>
-    </details>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Bar & Caffetteria <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">Vedi listino</span>
-            </div>
-            <p class="item-description">Caffè, Amari, Grappe e Cocktail.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">CAFFÈ</p>
-            <div class="price-row"><span>Espresso / Decaffeinato</span><span class="item-price">€1,00 / €1,10</span></div>
-            <div class="price-row"><span>Ginseng / Cappuccino</span><span class="item-price">€1,20 / €1,50</span></div>
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">LIQUORI E COCKTAIL</p>
-            <div class="price-row"><span>Amaro / Limoncello / Sambuca</span><span class="item-price">€3,00</span></div>
-            <div class="price-row"><span>Grappe / Rum / Gin Lemon</span><span class="item-price">€4,00 - €6,00</span></div>
-            <div class="price-row"><span>Aperol / Campari Spritz</span><span class="item-price">€5,00</span></div>
-        </div>
-    </details>
-
-    <div class="footer-info">
-        <p><i class="fab fa-instagram"></i> @kebabtropical</p>
-        <p><i class="fas fa-phone"></i> 333 5004410</p>
-        <p style="margin-top:15px; font-size: 0.7rem;">Kebab Tropical © 2026 - Menù Digitale</p>
-    </div>
-
+<div id="cart-btn" onclick="openCart()">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count">0</span> Ordina (€<span id="cart-total">0.00</span>)
 </div>
+
+<div id="product-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('product-modal')">&times;</span>
+        <h2 id="modal-title">Nome Prodotto</h2>
+        <p id="modal-price" style="color: var(--primary); font-weight: bold; margin-bottom: 20px;">€0.00</p>
+        
+        <div id="ingredients-section">
+            </div>
+
+        <button class="action-btn" onclick="addToCart()">AGGIUNGI ALL'ORDINE</button>
+    </div>
+</div>
+
+<div id="cart-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('cart-modal')">&times;</span>
+        <h2>Il tuo Ordine</h2>
+        <div id="cart-items-container" style="margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
+            <p>Il carrello è vuoto.</p>
+        </div>
+        <div style="text-align: right; font-weight: bold; font-size: 1.2rem; margin-bottom: 20px;">
+            Totale: €<span id="modal-cart-total">0.00</span>
+        </div>
+
+        <form name="ordine-kebab" method="POST" data-netlify="true" action="/success">
+            <div class="form-group">
+                <label>Nome e Cognome</label>
+                <input type="text" name="nome" required placeholder="Es. Mario Rossi">
+            </div>
+            <div class="form-group">
+                <label>Telefono (per conferma orario)</label>
+                <input type="tel" name="telefono" required placeholder="Es. 333 1234567">
+            </div>
+            <div class="form-group">
+                <label>Note aggiuntive / Orario preferito</label>
+                <input type="text" name="note_cliente" placeholder="Es. Posso ritirare alle 20:00?">
+            </div>
+            
+            <input type="hidden" name="riepilogo_ordine" id="order-summary">
+
+            <button type="submit" class="action-btn" style="background-color: var(--primary);">INVIA ORDINE</button>
+            <p style="font-size: 0.8rem; color: #777; margin-top: 10px; text-align: center;">
+                Riceverai una conferma dell'orario via Email/SMS.
+            </p>
+        </form>
+    </div>
+</div>
+
+<script>
+    // --- 1. CONFIGURAZIONE PRODOTTI ---
+    // Qui definisci i prodotti e i loro ingredienti base
+    const products = [
+        {
+            category: "Kebab",
+            items: [
+                { id: 1, name: "Kebab Panino", price: 5.50, desc: "Pane, carne, verdure, salse", baseIngredients: ["Cipolla", "Insalata", "Crauti", "Cetrioli", "Pomodoro", "Salsa Yogurt", "Salsa Curry", "Salsa Piccante"] },
+                { id: 2, name: "Piadina Kebab", price: 6.00, desc: "Piadina, carne, verdure, salse", baseIngredients: ["Cipolla", "Insalata", "Crauti", "Cetrioli", "Pomodoro", "Salsa Yogurt", "Salsa Curry", "Salsa Piccante"] },
+                { id: 3, name: "Kebab Tropical", price: 7.00, desc: "Con ananas e patatine", baseIngredients: ["Cipolla", "Insalata", "Crauti", "Cetrioli", "Pomodoro", "Patatine Fritte", "Ananas", "Salse"] }
+            ]
+        },
+        {
+            category: "Hamburger",
+            items: [
+                { id: 4, name: "Classico 180gr", price: 10.00, desc: "Con patatine", baseIngredients: ["Cipolla", "Insalata", "Pomodoro", "Bacon", "Cheddar", "Salsa Burger"] },
+                { id: 5, name: "Italiano 180gr", price: 10.00, desc: "Con patatine", baseIngredients: ["Insalata", "Pomodoro", "Provola", "Salsa BBQ"] }
+            ]
+        },
+        {
+            category: "Stuzzicheria",
+            items: [
+                { id: 6, name: "Patatine Fritte (Piccole)", price: 2.50, desc: "Porzione singola", baseIngredients: [] },
+                { id: 7, name: "Mix Tropical (10pz)", price: 5.50, desc: "Misto fritti", baseIngredients: [] }
+            ]
+        }
+    ];
+
+    const freeAddons = ["Ketchup", "Maionese", "Salsa BBQ"]; // Salse aggiuntive gratis
+
+    // --- 2. GENERAZIONE MENU HTML ---
+    const container = document.getElementById('menu-container');
+    
+    products.forEach(cat => {
+        container.innerHTML += `<div class="category-title">${cat.category}</div>`;
+        cat.items.forEach(item => {
+            // Convertiamo l'oggetto item in una stringa sicura per passarla alla funzione
+            const itemData = encodeURIComponent(JSON.stringify(item));
+            container.innerHTML += `
+                <div class="menu-item" onclick="openProductModal('${itemData}')">
+                    <div class="item-header">
+                        <span class="item-name">${item.name}</span>
+                        <span class="item-price">€${item.price.toFixed(2)}</span>
+                    </div>
+                    <p class="item-description">${item.desc}</p>
+                </div>`;
+        });
+    });
+
+    // --- 3. GESTIONE CARRELLO E MODAL ---
+    let cart = [];
+    let currentProduct = null;
+
+    function openProductModal(itemData) {
+        currentProduct = JSON.parse(decodeURIComponent(itemData));
+        document.getElementById('modal-title').innerText = currentProduct.name;
+        document.getElementById('modal-price').innerText = "€" + currentProduct.price.toFixed(2);
+        
+        const ingContainer = document.getElementById('ingredients-section');
+        ingContainer.innerHTML = "";
+
+        // Sezione Rimuovi (Solo se ci sono ingredienti base)
+        if (currentProduct.baseIngredients.length > 0) {
+            ingContainer.innerHTML += `<span class="ingredient-title">Rimuovi Ingredienti:</span>`;
+            currentProduct.baseIngredients.forEach(ing => {
+                ingContainer.innerHTML += `
+                    <label class="checkbox-label">
+                        <input type="checkbox" class="remove-ing" value="${ing}"> Senza ${ing}
+                    </label>`;
+            });
+        }
+
+        // Sezione Aggiungi Salse
+        ingContainer.innerHTML += `<span class="ingredient-title" style="margin-top:20px">Aggiungi Gratis:</span>`;
+        freeAddons.forEach(sauce => {
+            ingContainer.innerHTML += `
+                <label class="checkbox-label">
+                    <input type="checkbox" class="add-ing" value="${sauce}"> + ${sauce}
+                </label>`;
+        });
+
+        document.getElementById('product-modal').style.display = "flex";
+    }
+
+    function addToCart() {
+        const removes = Array.from(document.querySelectorAll('.remove-ing:checked')).map(el => "NO " + el.value);
+        const adds = Array.from(document.querySelectorAll('.add-ing:checked')).map(el => "+ " + el.value);
+        
+        const cartItem = {
+            ...currentProduct,
+            uniqueId: Date.now(), // ID univoco per permettere duplicati con modifiche diverse
+            modifications: [...removes, ...adds]
+        };
+
+        cart.push(cartItem);
+        updateCartUI();
+        closeModal('product-modal');
+    }
+
+    function removeFromCart(uniqueId) {
+        cart = cart.filter(item => item.uniqueId !== uniqueId);
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        // Aggiorna pulsante carrello
+        const total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById('cart-count').innerText = cart.length;
+        document.getElementById('cart-total').innerText = total.toFixed(2);
+        document.getElementById('modal-cart-total').innerText = total.toFixed(2);
+
+        // Aggiorna lista nel modal e campo nascosto per email
+        const listContainer = document.getElementById('cart-items-container');
+        const hiddenInput = document.getElementById('order-summary');
+        
+        if (cart.length === 0) {
+            listContainer.innerHTML = "<p>Il carrello è vuoto.</p>";
+            hiddenInput.value = "";
+            return;
+        }
+
+        listContainer.innerHTML = "";
+        let summaryText = ""; // Testo per l'email
+
+        cart.forEach(item => {
+            const modsText = item.modifications.length > 0 ? `(${item.modifications.join(', ')})` : "";
+            
+            // HTML per il sito
+            listContainer.innerHTML += `
+                <div class="cart-item">
+                    <div style="display:flex; justify-content:space-between;">
+                        <span class="cart-item-title">${item.name}</span>
+                        <span>€${item.price.toFixed(2)}</span>
+                    </div>
+                    <div class="cart-item-mods">${modsText}</div>
+                    <div class="remove-item" onclick="removeFromCart(${item.uniqueId})">Rimuovi</div>
+                </div>`;
+            
+            // Testo per l'email
+            summaryText += `- 1x ${item.name} ${modsText} - €${item.price.toFixed(2)}\n`;
+        });
+
+        summaryText += `\nTOTALE: €${total.toFixed(2)}`;
+        hiddenInput.value = summaryText;
+    }
+
+    function openCart() { document.getElementById('cart-modal').style.display = "flex"; }
+    
+    function closeModal(modalId) { document.getElementById(modalId).style.display = "none"; }
+
+    // Chiudi modal cliccando fuori
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
