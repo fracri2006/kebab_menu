@@ -13,7 +13,7 @@
             --dark: #1a1a1a;
             --gray: #777;
             --bg: #f4f4f7;
-            --accent: #2e7d32; /* Colore per richiamare il pistacchio/novità */
+            --accent: #2e7d32;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,10 +26,11 @@
             padding-bottom: 50px;
         }
 
+        /* ── PUNTO 1: Header migliorato ── */
         header {
             background-color: var(--dark);
             color: white;
-            padding: 40px 20px;
+            padding: 35px 20px 30px;
             text-align: center;
             border-bottom: 5px solid var(--primary);
         }
@@ -40,9 +41,30 @@
             letter-spacing: 2px;
         }
 
+        .header-tagline {
+            margin-top: 6px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.65);
+            letter-spacing: 1px;
+        }
+
+        .header-badge {
+            display: inline-block;
+            margin-top: 12px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* ── PUNTO 6: Container senza margin negativo ── */
         .container {
             max-width: 600px;
-            margin: -20px auto 0;
+            margin: 0 auto;
             padding: 0 15px;
         }
 
@@ -58,12 +80,12 @@
             gap: 10px;
         }
 
-        /* Stile speciale per la novità */
         .promo-title {
             border-left-color: var(--accent);
             color: var(--accent);
         }
 
+        /* ── PUNTO 2 & 4: Card con bordo sinistro colorato per categoria ── */
         .menu-item {
             background: white;
             border-radius: 12px;
@@ -73,9 +95,24 @@
             display: flex;
             flex-direction: column;
             border: none;
+            border-left: 4px solid var(--primary);
+            transition: box-shadow 0.2s ease;
         }
 
+        .menu-item:hover {
+            box-shadow: 0 6px 16px rgba(0,0,0,0.10);
         }
+
+        /* PUNTO 4: Card vegetariane con verde e sfondo leggermente diverso */
+        .cat-veggie .menu-item {
+            border-left-color: var(--accent);
+            background: #f9fdf9;
+        }
+
+        .cat-veggie .item-price {
+            color: var(--accent);
+        }
+
 
         .item-header {
             display: flex;
@@ -93,6 +130,8 @@
             font-weight: 700;
             color: var(--primary);
             font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 10px;
         }
 
         .item-description {
@@ -110,12 +149,36 @@
             font-style: italic;
         }
 
+        /* ── PUNTO 3: Animazione chevron + transizione contenuto details ── */
         details summary {
             list-style: none;
             outline: none;
             cursor: pointer;
         }
         details summary::-webkit-details-marker { display: none; }
+
+        details .chevron {
+            font-size: 0.8rem;
+            color: var(--gray);
+            transition: transform 0.25s ease;
+            display: inline-block;
+        }
+
+        details[open] .chevron {
+            transform: rotate(180deg);
+        }
+
+        details .details-body {
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.35s ease, opacity 0.3s ease;
+        }
+
+        details[open] .details-body {
+            max-height: 700px;
+            opacity: 1;
+        }
 
         .price-row {
             display: flex; 
@@ -126,150 +189,314 @@
             font-size: 0.95rem;
         }
 
+        /* ── PUNTO 5: Footer orari e indirizzo ── */
         .footer-info {
             text-align: center;
             margin-top: 40px;
-            padding: 20px;
+            padding: 0 0 20px;
             color: var(--gray);
             font-size: 0.85rem;
+        }
+
+        .footer-orari {
+            background: white;
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-align: left;
+            border-left: 4px solid var(--primary);
+        }
+
+        .footer-orari h3 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .orari-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            padding: 6px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .orari-row:last-of-type {
+            border-bottom: none;
+        }
+
+        .orari-row .giorno {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .orari-row .orario {
+            color: var(--gray);
+        }
+
+        .footer-note-orari {
+            font-size: 0.72rem;
+            color: var(--gray);
+            font-style: italic;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .footer-indirizzo {
+            font-size: 0.82rem;
+            margin-bottom: 10px;
+        }
+
+        .footer-indirizzo a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+            font-size: 0.85rem;
+        }
+
+        .footer-contacts a {
+            color: var(--gray);
+            text-decoration: none;
+        }
+
+        .footer-contacts a:hover {
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
 
+<!-- PUNTO 1: Header con tagline "più di 20 anni" -->
 <header>
     <h1>KEBAB TROPICAL</h1>
-    <p><i class="fas fa-utensils"></i> Paninoteca</p>
+    <p class="header-tagline"><i class="fas fa-utensils"></i> &nbsp;Paninoteca · San Nicandro Garganico</p>
+    <span class="header-badge">🏅 Oltre 20 anni di gusto</span>
 </header>
 
 <div class="container">
 
-    <div class="category-title"><i class="fas fa-utensils"></i> <h2>Kebab</h2></div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Kebab Panino</span><span class="item-price">€5,50</span></div>
-        <p class="item-description">Pane, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Piadina Kebab</span><span class="item-price">€6,00</span></div>
-        <p class="item-description">Piadina, carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Kebab Tropical</span><span class="item-price">€7,00</span></div>
-        <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, patatine fritte, salsa yogurt, curry e piccante.</p>
-        <div class="note-box">Aggiunta di pane: +€1,00</div>
-    </div>
-
-    <div class="category-title"><i class="fas fa-hamburger"></i> <h2>Hamburger</h2></div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Classico (180gr)</span><span class="item-price">€10,00</span></div>
-        <p class="item-description">Salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Con patatine.</p>
-        <div class="note-box">Doppio hamburger: +€3,00</div>
-    </div>
-    <div class="menu-item">
-        <div class="item-header"><span class="item-name">Italiano (180gr)</span><span class="item-price">€10,00</span></div>
-        <p class="item-description">Salsa BBQ, insalata, pomodoro e provola. Con patatine.</p>
-        <div class="note-box">Doppio hamburger: +€3,00</div>
+    <!-- KEBAB -->
+    <div class="cat-kebab">
+        <div class="category-title"><i class="fas fa-utensils"></i> <h2>Kebab</h2></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Kebab Panino</span><span class="item-price">€5,50</span></div>
+            <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
+        </div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Piadina Kebab</span><span class="item-price">€6,00</span></div>
+            <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
+        </div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Kebab Tropical</span><span class="item-price">€7,00</span></div>
+            <p class="item-description">Carne, cipolla, insalata, crauti, cetrioli, pomodoro, patatine fritte, salsa yogurt, curry e piccante.</p>
+            <div class="note-box">Aggiunta di pane: +€1,00</div>
+        </div>
     </div>
 
-    <div class="category-title"><i class="fas fa-drumstick-bite"></i> <h2>Stuzzicheria</h2></div>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Mix (10 pz) <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price">€5,50</span>
-            </div>
-            <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Crocchè con Mozzarella (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Mozzarelline (8 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Panzerottini (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Mini Arancine (6 pz)</span><span class="item-price">€4,00</span></div>
-            <div class="price-row"><span>Speedy Pollo (8 pz)</span><span class="item-price">€4,00</span></div>
+    <!-- ALTERNATIVE VEGETARIANE -->
+    <div class="cat-veggie">
+        <div class="category-title promo-title"><i class="fas fa-leaf"></i> <h2>Alternative Vegetariane</h2></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Panino Vegetariano</span><span class="item-price">€3,00</span></div>
+            <p class="item-description">Cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
         </div>
-    </details>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Patatine Fritte <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">Vedi prezzi</span>
-            </div>
-            <p class="item-description">Porzioni Piccole, Grandi o con Buccia.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Porzione Piccola</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Porzione Grande</span><span class="item-price">€4,50</span></div>
-            <div class="price-row"><span>Con buccia (Aromatizzata)</span><span class="item-price">€3,00</span></div>
-            <div class="note-box">Extra: Bacon +€1 | Cheddar +€1 | Wurstel +€2</div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Piadina Vegetariana</span><span class="item-price">€3,00</span></div>
+            <p class="item-description">Cipolla, insalata, crauti, cetrioli, pomodoro, salsa yogurt, curry e piccante.</p>
         </div>
-    </details>
-
-    <div class="category-title"><i class="fas fa-glass-cheers"></i> <h2>Bevande</h2></div>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Bibite e Analcolici <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,00</span>
-            </div>
-            <p class="item-description">Acqua, Coca Cola, Succhi e altro.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <div class="price-row"><span>Acqua 50 cl</span><span class="item-price">€1,00</span></div>
-            <div class="price-row"><span>Acqua Vetro 1 L</span><span class="item-price">€2,00</span></div>
-            <div class="price-row"><span>Coca Cola 33 cl / Zero Vetro</span><span class="item-price">€2,50/€3,00</span></div>
-            <div class="price-row"><span>Fanta Vetro / Lemonsoda</span><span class="item-price">€3,00 / €2,50</span></div>
-            <div class="price-row"><span>The Limone/Pesca / Schweppes</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Redbull / Succhi vari</span><span class="item-price">€3,00 / €2,00</span></div>
-            <div class="price-row"><span>Analcolico della casa</span><span class="item-price">€2,00</span></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Piatto Vegetariano</span><span class="item-price">€4,00</span></div>
+            <p class="item-description">Cipolla, insalata, crauti, cetrioli, pomodoro, patatine fritte, salsa yogurt, curry e piccante.</p>
+            <div class="note-box">Aggiunta di pane: +€1,00</div>
         </div>
-    </details>
+    </div>
 
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Birre <i class="fas fa-beer" style="font-size: 1rem; margin-left: 5px;"></i> <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,50</span>
-            </div>
-            <p class="item-description">Bottiglia, Spina e Artigianali.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">BOTTIGLIA</p>
-            <div class="price-row"><span>Dreher Lemon</span><span class="item-price">€1,50</span></div>
-            <div class="price-row"><span>Nastro Azzurro / Heineken / Bud</span><span class="item-price">€2,50</span></div>
-            <div class="price-row"><span>Corona / Tennent's Super</span><span class="item-price">€3,00</span></div>
-            <div class="price-row"><span>Paulaner / Franziskaner 50 cl</span><span class="item-price">€4,00</span></div>
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">ALLA SPINA (Messina)</p>
-            <div class="price-row"><span>Messina 20 cl / 40 cl</span><span class="item-price">€2,50 / €4,00</span></div>
-            <div class="price-row"><span>Messina 50 cl</span><span class="item-price">€5,00</span></div>
+    <!-- HAMBURGER -->
+    <div class="cat-hamburger">
+        <div class="category-title"><i class="fas fa-hamburger"></i> <h2>Hamburger</h2></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Classico (180gr)</span><span class="item-price">€10,00</span></div>
+            <p class="item-description">Salsa burger, cipolla, insalata, pomodoro, bacon e cheddar. Con patatine.</p>
+            <div class="note-box">Doppio hamburger: +€3,00</div>
         </div>
-    </details>
-
-    <details class="menu-item">
-        <summary>
-            <div class="item-header">
-                <span class="item-name">Bar & Caffetteria <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--gray);"></i></span>
-                <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">Vedi listino</span>
-            </div>
-            <p class="item-description">Caffè, Amari, Grappe e Cocktail.</p>
-        </summary>
-        <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">CAFFÈ</p>
-            <div class="price-row"><span>Espresso / Decaffeinato</span><span class="item-price">€1,00 / €1,10</span></div>
-            <div class="price-row"><span>Ginseng / Cappuccino</span><span class="item-price">€1,20 / €1,50</span></div>
-            <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">LIQUORI E COCKTAIL</p>
-            <div class="price-row"><span>Amaro / Limoncello / Sambuca</span><span class="item-price">€3,00</span></div>
-            <div class="price-row"><span>Grappe / Rum / Gin Lemon</span><span class="item-price">€4,00 - €6,00</span></div>
-            <div class="price-row"><span>Aperol / Campari Spritz</span><span class="item-price">€5,00</span></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Italiano (180gr)</span><span class="item-price">€10,00</span></div>
+            <p class="item-description">Salsa BBQ, insalata, pomodoro e provola. Con patatine.</p>
+            <div class="note-box">Doppio hamburger: +€3,00</div>
         </div>
-    </details>
+    </div>
 
+    <!-- COTOLETTA & CORDON BLEU -->
+    <div class="cat-cotoletta">
+        <div class="category-title"><i class="fas fa-drumstick-bite"></i> <h2>Cotoletta & Cordon Bleu</h2></div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Cotoletta</span><span class="item-price">€4,50</span></div>
+            <p class="item-description">Ketchup, maionese, insalata e pomodoro.</p>
+        </div>
+        <div class="menu-item">
+            <div class="item-header"><span class="item-name">Cordon Bleu</span><span class="item-price">€4,50</span></div>
+            <p class="item-description">Ketchup, maionese, insalata e pomodoro.</p>
+        </div>
+    </div>
+
+    <!-- STUZZICHERIA -->
+    <div class="cat-stuzzicheria">
+        <div class="category-title"><i class="fas fa-drumstick-bite"></i> <h2>Stuzzicheria</h2></div>
+
+        <details class="menu-item">
+            <summary>
+                <div class="item-header">
+                    <span class="item-name">Mix (10 pz) &nbsp;<i class="fas fa-chevron-down chevron"></i></span>
+                    <span class="item-price">€5,50</span>
+                </div>
+                <p class="item-description">2 crocchè, 2 mozzarelline, 2 panzerottini, 2 arancine, 2 speedy pollo.</p>
+            </summary>
+            <div class="details-body">
+                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <div class="price-row"><span>Crocchè con Mozzarella (6 pz)</span><span class="item-price">€4,00</span></div>
+                    <div class="price-row"><span>Mozzarelline (8 pz)</span><span class="item-price">€4,00</span></div>
+                    <div class="price-row"><span>Panzerottini (6 pz)</span><span class="item-price">€4,00</span></div>
+                    <div class="price-row"><span>Mini Arancine (6 pz)</span><span class="item-price">€4,00</span></div>
+                    <div class="price-row"><span>Speedy Pollo (8 pz)</span><span class="item-price">€4,00</span></div>
+                </div>
+            </div>
+        </details>
+
+        <details class="menu-item">
+            <summary>
+                <div class="item-header">
+                    <span class="item-name">Patatine Fritte &nbsp;<i class="fas fa-chevron-down chevron"></i></span>
+                    <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">Vedi prezzi</span>
+                </div>
+                <p class="item-description">Porzioni Piccole, Grandi o con Buccia.</p>
+            </summary>
+            <div class="details-body">
+                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <div class="price-row"><span>Porzione Piccola</span><span class="item-price">€2,50</span></div>
+                    <div class="price-row"><span>Porzione Grande</span><span class="item-price">€4,50</span></div>
+                    <div class="price-row"><span>Con buccia (Aromatizzata)</span><span class="item-price">€3,00</span></div>
+                    <div class="note-box">Extra: Bacon +€1 | Cheddar +€1 | Wurstel +€2</div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- BEVANDE -->
+    <div class="cat-bevande">
+        <div class="category-title"><i class="fas fa-glass-cheers"></i> <h2>Bevande</h2></div>
+
+        <details class="menu-item">
+            <summary>
+                <div class="item-header">
+                    <span class="item-name">Bibite e Analcolici &nbsp;<i class="fas fa-chevron-down chevron"></i></span>
+                    <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,00</span>
+                </div>
+                <p class="item-description">Acqua, Coca Cola, Succhi e altro.</p>
+            </summary>
+            <div class="details-body">
+                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <div class="price-row"><span>Acqua 50 cl</span><span class="item-price">€1,00</span></div>
+                    <div class="price-row"><span>Acqua Vetro 1 L</span><span class="item-price">€2,00</span></div>
+                    <div class="price-row"><span>Coca Cola 33 cl</span><span class="item-price">€2,50</span></div>
+                    <div class="price-row"><span>Coca Cola Vetro</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Coca Cola Zero Vetro</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Fanta Vetro</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Lemonsoda</span><span class="item-price">€2,50</span></div>
+                    <div class="price-row"><span>Thè Limone / Thè Pesca</span><span class="item-price">€2,50</span></div>
+                    <div class="price-row"><span>Redbull</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Succhi vari</span><span class="item-price">€2,00</span></div>
+                    <div class="price-row"><span>Analcolico della casa</span><span class="item-price">€2,00</span></div>
+                </div>
+            </div>
+        </details>
+
+        <details class="menu-item">
+            <summary>
+                <div class="item-header">
+                    <span class="item-name">Birre &nbsp;<i class="fas fa-chevron-down chevron"></i></span>
+                    <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1,50</span>
+                </div>
+                <p class="item-description">Bottiglia, Spina e Artigianali.</p>
+            </summary>
+            <div class="details-body">
+                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">BOTTIGLIA</p>
+                    <div class="price-row"><span>Dreher Lemon</span><span class="item-price">€1,50</span></div>
+                    <div class="price-row"><span>Nastro Azzurro / Heineken / Bud</span><span class="item-price">€2,50</span></div>
+                    <div class="price-row"><span>Corona / Tennent's Super</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Paulaner / Franziskaner 50 cl</span><span class="item-price">€4,00</span></div>
+                    <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">ALLA SPINA (Messina)</p>
+                    <div class="price-row"><span>Messina 20 cl / 40 cl</span><span class="item-price">€2,50 / €4,00</span></div>
+                    <div class="price-row"><span>Messina 50 cl</span><span class="item-price">€5,00</span></div>
+                </div>
+            </div>
+        </details>
+
+        <details class="menu-item">
+            <summary>
+                <div class="item-header">
+                    <span class="item-name">Bar & Caffetteria &nbsp;<i class="fas fa-chevron-down chevron"></i></span>
+                    <span class="item-price" style="font-size: 0.9rem; color: var(--gray);">da €1</span>
+                </div>
+                <p class="item-description">Caffè, Amari, Grappe e Cocktail.</p>
+            </summary>
+            <div class="details-body">
+                <div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin-bottom: 5px;">CAFFÈ</p>
+                    <div class="price-row"><span>Espresso / Decaffeinato</span><span class="item-price">€1,00 / €1,10</span></div>
+                    <div class="price-row"><span>Ginseng / Cappuccino</span><span class="item-price">€1,20 / €1,50</span></div>
+                    <p style="font-weight: bold; font-size: 0.8rem; color: var(--gray); margin: 10px 0 5px;">LIQUORI E COCKTAIL</p>
+                    <div class="price-row"><span>Amaro / Limoncello / Sambuca</span><span class="item-price">€3,00</span></div>
+                    <div class="price-row"><span>Grappe / Rum</span><span class="item-price">€4,00 - €6,00</span></div>
+                    <div class="price-row"><span>Aperol / Campari Spritz</span><span class="item-price">€5,00</span></div>
+                </div>
+            </div>
+        </details>
+    </div>
+
+    <!-- PUNTO 5: Footer con orari e indirizzo -->
     <div class="footer-info">
-        <p><i class="fab fa-instagram"></i> @kebabtropical</p>
-        <p><i class="fas fa-phone"></i> 333 5004410</p>
-        <p style="margin-top:15px; font-size: 0.7rem;">Kebab Tropical © 2026 - Menù Digitale</p>
+
+        <div class="footer-orari">
+            <h3><i class="fas fa-clock"></i> &nbsp;Orari di Apertura</h3>
+            <div class="orari-row">
+                <span class="giorno">Martedì – Sabato</span>
+                <span class="orario">16:15 – 23:00</span>
+            </div>
+            <div class="orari-row">
+                <span class="giorno">Domenica</span>
+                <span class="orario">16:45 – 23:00</span>
+            </div>
+            <div class="orari-row">
+                <span class="giorno">Lunedì</span>
+                <span class="orario" style="color: #e65100; font-weight: 700;">Chiuso</span>
+            </div>
+            <p class="footer-note-orari">⚠️ Gli orari possono variare in base a festività e disponibilità.</p>
+        </div>
+
+        <p class="footer-indirizzo">
+            <i class="fas fa-map-marker-alt"></i>&nbsp;
+            <a href="https://www.google.com/maps/place//data=!4m2!3m1!1s0x1337125963aa0831:0xa668f761ea7f51d1" target="_blank">
+                Via Lauro, 1 · 71015 San Nicandro Garganico (FG)
+            </a>
+        </p>
+
+        <div class="footer-contacts">
+            <a href="https://instagram.com/kebabtropical" target="_blank"><i class="fab fa-instagram"></i> @kebabtropical</a>
+            <a href="tel:+393335004410"><i class="fas fa-phone"></i> 333 5004410</a>
+        </div>
+
+        <p style="font-size: 0.7rem; color: var(--gray);">Kebab Tropical © 2026 · Menù Digitale</p>
     </div>
 
 </div>
